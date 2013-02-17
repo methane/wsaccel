@@ -12,6 +12,9 @@ from ws4py.server.geventserver import WebSocketWSGIApplication, \
      WebSocketWSGIHandler, WSGIServer
 from ws4py.websocket import EchoWebSocket
 
+import cutf8validator
+cutf8validator.patch_ws4py()
+
 class BroadcastWebSocket(EchoWebSocket):
     def opened(self):
         app = self.environ['ws4py.app']
