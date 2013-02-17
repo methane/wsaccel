@@ -1,0 +1,8 @@
+0.2
+===
+* Rename pacakge from cutf8validator to wsaccel.
+* Fix install from pypi.
+
+0.1
+===
+* First release.
