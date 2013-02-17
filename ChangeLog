@@ -1,3 +1,8 @@
+0.4
+===
+* Fix Utf8Validator can't validate bytes>=128
+* Accelerate ws4py's masking.
+
 0.3
 ===
 * Fix patch_*() doesn't work.
