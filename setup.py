@@ -44,24 +44,24 @@ class BuildExt(build_ext):
 
 class Sdist(sdist):
     def __init__(self, *args, **kwargs):
-        cythonize('cutf8validator/utf8validator.pyx')
+        cythonize('wsaccel/utf8validator.pyx')
         sdist.__init__(self, *args, **kwargs)
 
 ext_modules = [
-    Extension('cutf8validator.utf8validator',
-              ['cutf8validator/utf8validator.c']),
+    Extension('wsaccel.utf8validator',
+              ['wsaccel/utf8validator.c']),
     ]
 
 with open('README.md') as f:
     long_description = f.read()
 
-setup(name = "cutf8validator",
-      version = '0.1',
-      description = "Faster Utf8Validator for WS4PY and Autobahn",
+setup(name = "wsaccel",
+      version = '0.2',
+      description = "Accelerator for ws4py and AutobahnPython",
       maintainer = "INADA Naoki",
       maintainer_email = "songofacandy@gmail.com",
-      url = "https://github.com/methane/cutf8validator",
-      packages = ["cutf8validator"],
+      url = "https://github.com/methane/wsaccel",
+      packages = ["wsaccel"],
       cmdclass={'build_ext': BuildExt, 'sdist': Sdist},
       ext_modules=ext_modules,
       platforms = ["any"],
