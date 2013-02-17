@@ -52,7 +52,7 @@ ext_modules = [
               ['wsaccel/utf8validator.c']),
     ]
 
-with open('README.md') as f:
+with open('README.rst') as f:
     long_description = f.read()
 
 setup(name = "wsaccel",

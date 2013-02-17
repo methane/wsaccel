@@ -1,2 +1,2 @@
 include wsaccel/*.[ch]
-include README.md
+include README.rst
