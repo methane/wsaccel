@@ -25,9 +25,11 @@ from autobahn.websocket import WebSocketServerFactory, \
                                listenWS
 
 import time
+import wsaccel
+wsaccel.patch_autobahn()
 
 patched = False
-msg = b"hello world" * 100
+msg = b"hello world" * 1000
 
 class EchoServerProtocol(WebSocketServerProtocol):
 
@@ -46,7 +48,8 @@ class EchoClientProtocol(WebSocketClientProtocol):
     def onOpen(self):
         self.sendHello()
 
-    def onMessage(self, msg, binary):
+    def onMessage(self, received, binary):
+        #assert msg == received
         self.cnt += 1
         if self.cnt < 1000:
             self.sendHello()
@@ -59,7 +62,6 @@ class EchoClientProtocol(WebSocketClientProtocol):
         if patched:
             reactor.stop()
             return
-        import wsaccel
         wsaccel.patch_autobahn()
         patched = True
         start_client()

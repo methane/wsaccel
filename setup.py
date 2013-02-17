@@ -45,18 +45,19 @@ class BuildExt(build_ext):
 class Sdist(sdist):
     def __init__(self, *args, **kwargs):
         cythonize('wsaccel/utf8validator.pyx')
+        cythonize('wsaccel/xormask.pyx')
         sdist.__init__(self, *args, **kwargs)
 
 ext_modules = [
-    Extension('wsaccel.utf8validator',
-              ['wsaccel/utf8validator.c']),
+    Extension('wsaccel.utf8validator', ['wsaccel/utf8validator.c']),
+    Extension('wsaccel.xormask', ['wsaccel/xormask.c']),
     ]
 
 with open('README.rst') as f:
     long_description = f.read()
 
 setup(name = "wsaccel",
-      version = '0.2',
+      version = '0.3',
       description = "Accelerator for ws4py and AutobahnPython",
       maintainer = "INADA Naoki",
       maintainer_email = "songofacandy@gmail.com",
