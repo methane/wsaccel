@@ -24,13 +24,16 @@ cdef class XorMaskerSimple:
     cdef char mask[4]
 
     def __init__(self, mask):
-        assert len(mask) == 4
-        assert isinstance(mask, (bytes, bytearray))
+        cdef Py_buffer view
+        cdef char* msk
+        PyObject_GetBuffer(mask, &view, PyBUF_SIMPLE)
+        assert view.len == 4
+        msk = <char*>view.buf
         self.ptr = 0
-        self.mask[0] = mask[0]
-        self.mask[1] = mask[1]
-        self.mask[2] = mask[2]
-        self.mask[3] = mask[3]
+        self.mask[0] = msk[0]
+        self.mask[1] = msk[1]
+        self.mask[2] = msk[2]
+        self.mask[3] = msk[3]
 
     def pointer(self):
         return self.ptr
@@ -53,7 +56,7 @@ cdef class XorMaskerSimple:
         ptr = self.ptr
 
         for i in range(dlen):
-            payload[i] = cdata[i] ^ self.mask[ptr & 3]
+            out[i] = cdata[i] ^ self.mask[ptr & 3]
         self.ptr = ptr
         return payload
 

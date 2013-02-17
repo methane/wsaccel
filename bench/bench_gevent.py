@@ -51,7 +51,7 @@ class EchoClient(WebSocketClient):
                 server.stop()
 
 def start_client():
-    ws = EchoClient('ws://localhost:9000/ws', protocols=['http-only', 'chat'])
+    ws = EchoClient('ws://127.0.0.1:9000/ws')
     ws.connect()
 
 if __name__ == '__main__':
