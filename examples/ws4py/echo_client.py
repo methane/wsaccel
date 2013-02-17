@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from ws4py.client.threadedclient import WebSocketClient
-import cutf8validator
-cutf8validator.patch_ws4py()
+import wsaccel
+wsaccel.patch_ws4py()
 
 class EchoClient(WebSocketClient):
     def opened(self):
