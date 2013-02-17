@@ -1,7 +1,7 @@
 cutf8validator
 ===============
 
-Utf8Validator implemented in Cython.
+Utf8Validator for AutobahnPython and WebSocket-For-Python implemented in Cython.
 
 ```python
 import cutf8validator
