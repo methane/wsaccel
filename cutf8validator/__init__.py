@@ -1,9 +1,9 @@
 def patch_autobahn():
     import autobahn.websocket
-    from import cutf8validator.utf8validator import Utf8Validator
+    from cutf8validator.utf8validator import Utf8Validator
     autobahn.websocket.Utf8Validator = Utf8Validator
 
 def patch_ws4py():
     import ws4py.streaming
-    from import cutf8validator.utf8validator import Utf8Validator
+    from cutf8validator.utf8validator import Utf8Validator
     ws4py.streaming.Utf8Validator = Utf8Validator

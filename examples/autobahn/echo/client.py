@@ -22,6 +22,8 @@ from autobahn.websocket import WebSocketClientFactory, \
                                WebSocketClientProtocol, \
                                connectWS
 
+import cutf8validator
+cutf8validator.patch_autobahn()
 
 class EchoClientProtocol(WebSocketClientProtocol):
 
