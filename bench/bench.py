@@ -26,10 +26,10 @@ from autobahn.websocket import WebSocketServerFactory, \
 
 import time
 import wsaccel
-wsaccel.patch_autobahn()
+#wsaccel.patch_autobahn()
 
 patched = False
-msg = b"hello world" * 1000
+msg = b"hello world" * 100
 
 class EchoServerProtocol(WebSocketServerProtocol):
 
