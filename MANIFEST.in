@@ -1,2 +1,2 @@
-include cutf8validator/*.[ch]
+include wsaccel/*.[ch]
 include README.md
