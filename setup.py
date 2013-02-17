@@ -52,6 +52,8 @@ ext_modules = [
               ['cutf8validator/utf8validator.c']),
     ]
 
+with open('README.md') as f:
+    long_description = f.read()
 
 setup(name = "cutf8validator",
       version = '0.1',
@@ -64,8 +66,7 @@ setup(name = "cutf8validator",
       ext_modules=ext_modules,
       platforms = ["any"],
       license = 'Apache',
-      long_description = "UTF-8 Validator implemented in Cython.\n"
-            "Faster replacement for utf8validator in ws4py and Autobahn.",
+      long_description=long_description,
       classifiers=[
           'Intended Audience :: Developers',
           'Operating System :: OS Independent',
