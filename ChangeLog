@@ -1,3 +1,8 @@
+0.3
+===
+* Fix patch_*() doesn't work.
+* Add Cython version of XorMasker for Autobahn.
+
 0.2
 ===
 * Rename pacakge from cutf8validator to wsaccel.
