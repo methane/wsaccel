@@ -99,7 +99,7 @@ cdef class Utf8Validator(object):
         """
         cdef int state = self.state
         cdef int i=0, b
-        cdef char* buf
+        cdef unsigned char* buf
         cdef Py_ssize_t buf_len
         PyObject_AsReadBuffer(ba, <void**>&buf, &buf_len)
         for i in range(buf_len):
@@ -110,6 +110,7 @@ cdef class Utf8Validator(object):
                 self.i += i
                 self.state = state
                 return False, False, i, self.i
+        i = buf_len
         self.i += i
         self.state = state
         return True, state == _UTF8_ACCEPT, i, self.i
