@@ -24,3 +24,14 @@ def patch_ws4py():
 
     framing.Frame.mask = mask
     framing.Frame.unmask = mask
+
+
+def patch_tornado():
+    from tornado.websocket import WebSocektProtocol17
+    from wsaccel.xormask import XorMaskerSimple
+
+    def _apply_mask(self, mask, data):
+        masker = XorMaskerSimple(mask)
+        return masker.process(data)
+
+    WebSocektProtocol17._apply_mask = _apply_mask
