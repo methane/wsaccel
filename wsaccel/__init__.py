@@ -27,11 +27,11 @@ def patch_ws4py():
 
 
 def patch_tornado():
-    from tornado.websocket import WebSocektProtocol17
+    from tornado.websocket import WebSocketProtocol13
     from wsaccel.xormask import XorMaskerSimple
 
     def _apply_mask(self, mask, data):
         masker = XorMaskerSimple(mask)
         return masker.process(data)
 
-    WebSocektProtocol17._apply_mask = _apply_mask
+    WebSocketProtocol13._apply_mask = _apply_mask
