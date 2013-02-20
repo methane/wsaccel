@@ -51,17 +51,17 @@ ext_modules = [
 with open('README.rst') as f:
     long_description = f.read()
 
-setup(name = "wsaccel",
-      version = '0.4',
-      description = "Accelerator for ws4py and AutobahnPython",
-      maintainer = "INADA Naoki",
-      maintainer_email = "songofacandy@gmail.com",
-      url = "https://github.com/methane/wsaccel",
-      packages = ["wsaccel"],
+setup(name="wsaccel",
+      version='0.5',
+      description="Accelerator for ws4py and AutobahnPython",
+      maintainer="INADA Naoki",
+      maintainer_email="songofacandy@gmail.com",
+      url="https://github.com/methane/wsaccel",
+      packages=["wsaccel"],
       cmdclass={'build_ext': BuildExt, 'sdist': Sdist},
       ext_modules=ext_modules,
-      platforms = ["any"],
-      license = 'Apache',
+      platforms=["any"],
+      license='Apache',
       long_description=long_description,
       classifiers=[
           'Intended Audience :: Developers',
@@ -75,4 +75,4 @@ setup(name = "wsaccel",
           'Programming Language :: Python :: 3.3',
           'Programming Language :: Python :: Implementation :: CPython',
           ],
-     )
+      )
