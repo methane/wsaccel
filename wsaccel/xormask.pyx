@@ -18,6 +18,7 @@ cdef class XorMaskerNull:
         self.ptr += len(data)
         return data
 
+
 cdef class XorMaskerSimple:
 
     cdef Py_ssize_t ptr
@@ -42,7 +43,7 @@ cdef class XorMaskerSimple:
         self.ptr = 0
 
     def process(self, data):
-        cdef Py_ssize_t dlen, ptr
+        cdef Py_ssize_t dlen
         cdef char* cdata
         cdef char* out
         cdef Py_buffer view
@@ -53,10 +54,12 @@ cdef class XorMaskerSimple:
 
         payload = PyBytes_FromStringAndSize(NULL, dlen)
         out = <char*>PyBytes_AsString(payload)
-        ptr = self.ptr
 
         for i in range(dlen):
-            out[i] = cdata[i] ^ self.mask[ptr & 3]
-        self.ptr = ptr
+            out[i] = cdata[i] ^ self.mask[self.ptr & 3]
+            self.ptr += 1
         return payload
 
+
+def createXorMasker(mask, len = None):
+    return XorMaskerSimple(mask)
