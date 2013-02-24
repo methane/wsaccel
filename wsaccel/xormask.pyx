@@ -18,6 +18,7 @@ cdef class XorMaskerNull:
         self.ptr += len(data)
         return data
 
+
 cdef class XorMaskerSimple:
 
     cdef Py_ssize_t ptr
@@ -58,3 +59,7 @@ cdef class XorMaskerSimple:
             out[i] = cdata[i] ^ self.mask[self.ptr & 3]
             self.ptr += 1
         return payload
+
+
+def createXorMasker(mask, len = None):
+    return XorMaskerSimple(mask)
