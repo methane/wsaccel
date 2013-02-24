@@ -7,6 +7,9 @@ WSAccell is WebSocket accelerator for `AutobahnPython <http://autobahn.ws/python
 
 WSAccell replaces per-byte process in them with Cython version.
 
+AutobahnPython beginning with version 0.6 automatically uses WSAccell if available.
+Otherwise you can run-time patch supported WebSocket libraries using:
+
 .. code-block:: python
 
     import wsaccel
