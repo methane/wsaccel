@@ -29,7 +29,7 @@ import wsaccel
 #wsaccel.patch_autobahn()
 
 patched = False
-msg = b"hello world" * 100
+msg = (b"hello world" * 1000)[:1000]
 
 class EchoServerProtocol(WebSocketServerProtocol):
 

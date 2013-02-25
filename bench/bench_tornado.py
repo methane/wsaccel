@@ -6,7 +6,7 @@ import time
 import wsaccel
 
 patched = 0
-msg = b"hello world" * 100
+msg = (b"hello world" * 100)[:1000]
 
 
 class TornadoClient(object):

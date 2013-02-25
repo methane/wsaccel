@@ -12,7 +12,7 @@ import wsaccel
 patched = False
 #wsaccel.patch_ws4py()
 
-msg = b'Hello World' * 100
+msg = (b"hello world" * 1000)[:1000]
 
 
 class EchoWebSocketApplication(object):
