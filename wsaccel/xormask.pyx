@@ -61,5 +61,5 @@ cdef class XorMaskerSimple:
         return payload
 
 
-def createXorMasker(mask, len = None):
+def createXorMasker(mask, len=None):
     return XorMaskerSimple(mask)
