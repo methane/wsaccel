@@ -1,3 +1,7 @@
+0.6
+===
+* Fix XorMasker (Thanks @oberstet)
+
 0.5
 ===
 * Support Tornado
