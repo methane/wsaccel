@@ -20,8 +20,8 @@ def cythonize(src):
 
 def ensure_source(src):
     pyx = os.path.splitext(src)[0] + '.pyx'
-    if not os.path.exists(src) \
-       or os.stat(src).st_mtime < os.stat(pyx).st_mtime:
+    if (not os.path.exists(src) or (os.path.exists(pyx)
+            and os.stat(src).st_mtime < os.stat(pyx).st_mtime)):
         cythonize(pyx)
     return src
 
