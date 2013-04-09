@@ -20,9 +20,10 @@ def cythonize(src):
 
 def ensure_source(src):
     pyx = os.path.splitext(src)[0] + '.pyx'
-    if not os.path.exists(src) \
-       or os.stat(src).st_mtime < os.stat(pyx).st_mtime:
-        cythonize(pyx)
+    if os.path.exists(pyx):
+        if not os.path.exists(src) \
+           or os.stat(src).st_mtime < os.stat(pyx).st_mtime:
+            cythonize(pyx)
     return src
 
 
@@ -52,7 +53,7 @@ with open('README.rst') as f:
     long_description = f.read()
 
 setup(name="wsaccel",
-      version='0.6',
+      version='0.6.1',
       description="Accelerator for ws4py and AutobahnPython",
       maintainer="INADA Naoki",
       maintainer_email="songofacandy@gmail.com",
