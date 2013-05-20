@@ -1,6 +1,9 @@
 from cpython.buffer cimport *
 from cpython.bytes cimport *
 
+cdef extern from "Python.h":
+    cdef int PyObject_AsReadBuffer(object o, const void** buff, Py_ssize_t* buf_len) except -1
+
 cdef class XorMaskerNull:
 
     cdef Py_ssize_t ptr
@@ -22,15 +25,17 @@ cdef class XorMaskerNull:
 cdef class XorMaskerSimple:
 
     cdef Py_ssize_t ptr
+    cdef object _maskobj
     cdef char mask[4]
 
     def __init__(self, mask):
-        cdef Py_buffer view
-        cdef char* msk
-        PyObject_GetBuffer(mask, &view, PyBUF_SIMPLE)
-        assert view.len == 4
-        msk = <char*>view.buf
+        cdef const char* msk
+        cdef Py_ssize_t msk_len
         self.ptr = 0
+        self._maskobj = mask  # keep object
+        PyObject_AsReadBuffer(mask, <const void**>&msk, &msk_len)
+        if msk_len != 4:
+            raise ValueError("mask should be 4byte.")
         self.mask[0] = msk[0]
         self.mask[1] = msk[1]
         self.mask[2] = msk[2]
@@ -46,11 +51,8 @@ cdef class XorMaskerSimple:
         cdef Py_ssize_t dlen
         cdef char* cdata
         cdef char* out
-        cdef Py_buffer view
         cdef int i
-        PyObject_GetBuffer(data, &view, PyBUF_SIMPLE)
-        dlen = view.len
-        cdata = <char*>view.buf
+        PyObject_AsReadBuffer(data, <const void**>&cdata, &dlen)
 
         payload = PyBytes_FromStringAndSize(NULL, dlen)
         out = <char*>PyBytes_AsString(payload)

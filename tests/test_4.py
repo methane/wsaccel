@@ -1,3 +1,4 @@
+#coding: utf-8
 import wsaccel.utf8validator
 
 def test_validate():
