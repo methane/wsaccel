@@ -1,3 +1,5 @@
+__version__ = '0.6.2'
+
 def patch_autobahn():
     from wsaccel.utf8validator import Utf8Validator
     from wsaccel.xormask import XorMaskerNull, XorMaskerSimple

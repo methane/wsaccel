@@ -53,7 +53,7 @@ with open('README.rst') as f:
     long_description = f.read()
 
 setup(name="wsaccel",
-      version='0.6.1',
+      version='0.6.2',
       description="Accelerator for ws4py and AutobahnPython",
       maintainer="INADA Naoki",
       maintainer_email="songofacandy@gmail.com",
