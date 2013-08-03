@@ -16,7 +16,7 @@ class NoCython(Exception):
 
 def cythonize(src):
     sys.stderr.write("cythonize: %r\n" % (src,))
-    subprocess.check_call("cython '%s'" % (src,), shell=True)
+    subprocess.check_call("cython %s" % (src,), shell=True)
 
 def ensure_source(src):
     pyx = os.path.splitext(src)[0] + '.pyx'
