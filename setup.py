@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import io
 import os
 import sys
 import subprocess
@@ -47,9 +48,9 @@ class Sdist(sdist):
 ext_modules = [
     Extension('wsaccel.utf8validator', ['wsaccel/utf8validator.c']),
     Extension('wsaccel.xormask', ['wsaccel/xormask.c']),
-    ]
+]
 
-with open('README.rst') as f:
+with io.open('README.rst', encoding='utf-8') as f:
     long_description = f.read()
 
 setup(name="wsaccel",
@@ -69,11 +70,11 @@ setup(name="wsaccel",
           'Operating System :: OS Independent',
           'Programming Language :: Python',
           'Programming Language :: Python :: 2',
-          'Programming Language :: Python :: 2.6',
           'Programming Language :: Python :: 2.7',
           'Programming Language :: Python :: 3',
-          'Programming Language :: Python :: 3.2',
           'Programming Language :: Python :: 3.3',
+          'Programming Language :: Python :: 3.4',
+          'Programming Language :: Python :: 3.5',
           'Programming Language :: Python :: Implementation :: CPython',
           ],
       )

@@ -16,3 +16,13 @@ Otherwise you can run-time patch supported WebSocket libraries using:
     wsaccel.patch_autobahn()  # for autobahn.
     wsaccel.patch_ws4py()     # for ws4py.
     wsaccel.patch_tornado()   # for Tornado
+
+test
+----
+
+wsaccel uses `pytest <https://pytest.org/>`_ for testing.
+
+.. code-block:: console
+
+    $ pip install pytest
+    $ py.test tests
