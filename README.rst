@@ -1,6 +1,9 @@
 WSAccell
 =========
 
+.. image:: https://travis-ci.org/methane/wsaccel.svg?branch=master
+    :target: https://travis-ci.org/methane/wsaccel
+
 WSAccell is WebSocket accelerator for `AutobahnPython <http://autobahn.ws/python>`_,
 `ws4py <https://github.com/Lawouach/WebSocket-for-Python>`_ and
 `Tornado <http://www.tornadoweb.org/>`_.
