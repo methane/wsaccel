@@ -5,8 +5,7 @@ WSAccell
     :target: https://travis-ci.org/methane/wsaccel
 
 WSAccell is WebSocket accelerator for `AutobahnPython <http://autobahn.ws/python>`_,
-`ws4py <https://github.com/Lawouach/WebSocket-for-Python>`_ and
-`Tornado <http://www.tornadoweb.org/>`_.
+and `ws4py <https://github.com/Lawouach/WebSocket-for-Python>`_.
 
 WSAccell replaces per-byte process in them with Cython version.
 
@@ -18,7 +17,11 @@ Otherwise you can run-time patch supported WebSocket libraries using:
     import wsaccel
     wsaccel.patch_autobahn()  # for autobahn.
     wsaccel.patch_ws4py()     # for ws4py.
-    wsaccel.patch_tornado()   # for Tornado
+
+.. note::
+    WSAccell also provides accelerator for Tornado.  But Tornado provides own speedup
+    module for now.  So Tornado acceralator has been deprecated.
+
 
 test
 ----
