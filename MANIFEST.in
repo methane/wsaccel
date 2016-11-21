@@ -1,2 +1,3 @@
 include wsaccel/*.[ch]
 include README.rst
+include LICENSE
