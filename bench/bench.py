@@ -17,12 +17,14 @@
 ###############################################################################
 
 from twisted.internet import reactor
-from autobahn.websocket import WebSocketClientFactory, \
-                               WebSocketClientProtocol, \
-                               connectWS
-from autobahn.websocket import WebSocketServerFactory, \
-                               WebSocketServerProtocol, \
-                               listenWS
+from autobahn.twisted.websocket import (
+    WebSocketClientFactory,
+    WebSocketClientProtocol,
+    connectWS,
+    WebSocketServerFactory,
+    WebSocketServerProtocol,
+    listenWS,
+)
 
 import time
 import wsaccel
@@ -39,6 +41,7 @@ class EchoServerProtocol(WebSocketServerProtocol):
 class EchoClientProtocol(WebSocketClientProtocol):
 
     def __init__(self):
+        super().__init__()
         self.cnt = 0
         self.t_start = time.time()
 
@@ -69,13 +72,10 @@ class EchoClientProtocol(WebSocketClientProtocol):
 def start_server():
     factory = WebSocketServerFactory("ws://127.0.0.1:9000")
     factory.protocol = EchoServerProtocol
-    factory.setProtocolOptions(allowHixie76 = True)
     listenWS(factory)
 
 def start_client():
     factory = WebSocketClientFactory('ws://127.0.0.1:9000')
-    # uncomment to use Hixie-76 protocol
-    factory.setProtocolOptions(allowHixie76 = True, version = 0)
     factory.protocol = EchoClientProtocol
     connectWS(factory)
 
