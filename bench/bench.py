@@ -27,10 +27,7 @@ from autobahn.twisted.websocket import (
 )
 
 import time
-import wsaccel
-#wsaccel.patch_autobahn()
 
-patched = False
 msg = (b"hello world" * 1000)[:1000]
 
 class EchoServerProtocol(WebSocketServerProtocol):
@@ -61,13 +58,8 @@ class EchoClientProtocol(WebSocketClientProtocol):
             print(time.time() - self.t_start)
 
     def onClose(self, *args):
-        global patched
-        if patched:
-            reactor.stop()
-            return
-        wsaccel.patch_autobahn()
-        patched = True
-        start_client()
+        reactor.stop()
+        return
 
 def start_server():
     factory = WebSocketServerFactory("ws://127.0.0.1:9000")
