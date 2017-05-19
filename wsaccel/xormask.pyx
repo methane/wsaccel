@@ -54,8 +54,10 @@ cdef class XorMaskerSimple:
         cdef int i
         PyObject_AsReadBuffer(data, <const void**>&cdata, &dlen)
 
-        payload = PyBytes_FromStringAndSize(NULL, dlen)
+        payload = PyBytes_FromStringAndSize(cdata, dlen)
         out = <char*>PyBytes_AsString(payload)
+        # Assumption: PyBytes_FromStringAndSize returns at least 4-bytes aligned memory.
+        assert <size_t>out & 3 == 0
 
         cdef int start = self.ptr & 3
         cdef char *mask = [
@@ -65,8 +67,10 @@ cdef class XorMaskerSimple:
             self.mask[(start + 3) & 3],
         ]
 
-        for i in range(dlen):
-            out[i] = cdata[i] ^ mask[i & 3]
+        for i in range(dlen / 4):
+            (<unsigned *>out)[i] ^= (<unsigned *>mask)[0]
+        for i in range(dlen - (dlen & 3), dlen):
+            out[i] ^= mask[i & 3]
         self.ptr += dlen
         return payload
 
