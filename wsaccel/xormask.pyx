@@ -57,9 +57,17 @@ cdef class XorMaskerSimple:
         payload = PyBytes_FromStringAndSize(NULL, dlen)
         out = <char*>PyBytes_AsString(payload)
 
+        cdef int start = self.ptr & 3
+        cdef char *mask = [
+            self.mask[(start + 0) & 3],
+            self.mask[(start + 1) & 3],
+            self.mask[(start + 2) & 3],
+            self.mask[(start + 3) & 3],
+        ]
+
         for i in range(dlen):
-            out[i] = cdata[i] ^ self.mask[self.ptr & 3]
-            self.ptr += 1
+            out[i] = cdata[i] ^ mask[i & 3]
+        self.ptr += dlen
         return payload
 
 
