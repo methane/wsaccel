@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 ###############################################################################
 ##
 ##  Copyright 2011,2012 Tavendo GmbH
@@ -28,7 +29,7 @@ from autobahn.twisted.websocket import (
 
 import time
 
-msg = (b"hello world" * 1000)[:1000]
+msg = b"hello world" * 1000
 
 class EchoServerProtocol(WebSocketServerProtocol):
 
@@ -51,7 +52,7 @@ class EchoClientProtocol(WebSocketClientProtocol):
     def onMessage(self, received, binary):
         #assert msg == received
         self.cnt += 1
-        if self.cnt < 1000:
+        if self.cnt < 10000:
             self.sendHello()
         else:
             self.sendClose()
