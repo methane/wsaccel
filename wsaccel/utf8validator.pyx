@@ -33,9 +33,6 @@
 cdef extern from "dfa.h":
     cdef char* UTF8VALIDATOR_DFA
 
-cdef extern from "Python.h":
-    int PyObject_AsReadBuffer(object, void**, Py_ssize_t*) except -1
-
 DEF _UTF8_ACCEPT = 0
 DEF _UTF8_REJECT = 1
 
@@ -84,7 +81,7 @@ cdef class Utf8Validator(object):
         self.codepoint = 0
         self.i = 0
 
-    def validate(self, ba):
+    def validate(self, const unsigned char [:] buf):
         """
         Incrementally validate a chunk of bytes provided as bytearray.
 
@@ -94,23 +91,19 @@ cdef class Utf8Validator(object):
         invalid, a quad with valid? == False is returned. currentIndex returns
         the index within the currently consumed chunk, and totalIndex the
         index within the total consumed sequence that was the point of bail out.
-        When valid? == True, currentIndex will be len(ba) and totalIndex the
+        When valid? == True, currentIndex will be len(buf) and totalIndex the
         total amount of consumed bytes.
         """
         cdef int state = self.state
         cdef int i=0, b
-        cdef unsigned char* buf
-        cdef Py_ssize_t buf_len
-        PyObject_AsReadBuffer(ba, <void**>&buf, &buf_len)
-        for i in range(buf_len):
-            b = buf[i]
+        for i, b in enumerate(buf):
             ## optimized version of decode(), since we are not interested in actual code points
             state = UTF8VALIDATOR_DFA[256 + (state << 4) + UTF8VALIDATOR_DFA[b]]
             if state == _UTF8_REJECT:
                 self.i += i
                 self.state = state
                 return False, False, i, self.i
-        i = buf_len
+        i = len(buf)
         self.i += i
         self.state = state
         return True, state == _UTF8_ACCEPT, i, self.i
