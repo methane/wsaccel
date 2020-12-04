@@ -11,4 +11,4 @@ install:
     - "pip install cython"
     - "pip install ."
 
-script: "py.test -v tests"
+script: "pytest -v tests"
