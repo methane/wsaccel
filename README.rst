@@ -20,7 +20,7 @@ Otherwise you can run-time patch supported WebSocket libraries using:
 
 .. note::
     WSAccell also provides accelerator for Tornado.  But Tornado provides own speedup
-    module for now.  So Tornado acceralator has been deprecated.
+    module for now.  So Tornado accelerator has been deprecated.
 
 
 test
