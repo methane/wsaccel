@@ -4,7 +4,12 @@ WSAccell
 .. image:: https://travis-ci.org/methane/wsaccel.svg?branch=master
     :target: https://travis-ci.org/methane/wsaccel
 
-WSAccell is WebSocket accelerator for `AutobahnPython <http://autobahn.ws/python>`_,
+**NOTE: AutobahnPython and ws4py are not actively maintained. So I will stop this project too.
+Please migrate to `Tornado <https://www.tornadoweb.org/en/stable/>`_ or
+`websockets <https://websockets.readthedocs.io/en/stable/intro.html>`_.
+
+
+WSAccell is WebSocket accelerator for `AutobahnPython <https://autobahn.readthedocs.io/en/latest/>`_,
 and `ws4py <https://github.com/Lawouach/WebSocket-for-Python>`_.
 
 WSAccell replaces per-byte process in them with Cython version.
