@@ -8,7 +8,7 @@ all:
 	@echo ""
 
 install:
-	python setup.py install
+	python3 setup.py install
 
 clean:
 	rm -rf ./wsaccel.egg-info
@@ -17,12 +17,9 @@ clean:
 	find . -name "*.pyc" -exec rm -f {} \;
 
 build:
-	python setup.py sdist
-	python setup.py bdist_egg
-	python setup.py bdist_wininst
+	python3 -m pip install Cython==0.29.32
+	python3 setup.py sdist
 
 publish:
-	python setup.py register
-	python setup.py sdist upload
-	python setup.py bdist_egg upload
-	python setup.py bdist_wininst upload
+	python3 setup.py register
+	python3 setup.py sdist upload
