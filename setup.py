@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-import io
 import os
 import sys
 import subprocess
@@ -34,7 +32,6 @@ class BuildExt(build_ext):
             ext.sources = list(map(ensure_source, ext.sources))
         except NoCython:
             print("Cython is required for building extension from checkout.")
-            print("Install Cython >= 0.16 or install ws4py from PyPI.")
             raise
         return build_ext.build_extension(self, ext)
 
@@ -54,7 +51,7 @@ with open('README.rst', encoding='utf-8') as f:
     long_description = f.read()
 
 setup(name="wsaccel",
-      version='0.6.3',
+      version='0.6.4',
       description="Accelerator for ws4py and AutobahnPython",
       maintainer="Inada Naoki",
       maintainer_email="songofacandy@gmail.com",
@@ -73,6 +70,8 @@ setup(name="wsaccel",
           'Programming Language :: Python :: 3.7',
           'Programming Language :: Python :: 3.8',
           'Programming Language :: Python :: 3.9',
+          'Programming Language :: Python :: 3.10',
+          'Programming Language :: Python :: 3.11',
           'Programming Language :: Python :: Implementation :: CPython',
           ],
       )

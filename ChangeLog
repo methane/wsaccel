@@ -1,3 +1,8 @@
+0.6.4
+=====
+* Support Python 3.11
+* Drop ``patch_tornado``
+
 0.6.3
 =====
 * Support Python 3.10
