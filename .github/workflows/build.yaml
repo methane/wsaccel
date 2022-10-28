@@ -2,21 +2,21 @@ name: Build packages
 on: [push]
 
 jobs:
-  build:
+  build-sdist:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v3
       - name: build
         run: |
-          pip install Cython wheel setuptools
+          pip install -r requirements.txt
           python setup.py sdist
       - uses: actions/upload-artifact@v2
         with:
           name: sdist
           path: dist
 
-  wheel:
+  build-wheel:
     strategy:
       matrix:
         os: [ubuntu-22.04, windows-2022, macos-10.15]
@@ -41,7 +41,7 @@ jobs:
       - name: Prepare
         shell: bash
         run: |
-          pip install Cython wheel setuptools
+          pip install -r requirements.txt
 
       - name: Build
         uses: pypa/cibuildwheel@v2.9.0
