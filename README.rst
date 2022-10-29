@@ -1,9 +1,6 @@
 WSAccell
 =========
 
-.. image:: https://travis-ci.org/methane/wsaccel.svg?branch=master
-    :target: https://travis-ci.org/methane/wsaccel
-
 **NOTE: AutobahnPython and ws4py are not actively maintained. So I will stop this project too.
 Please migrate to `Tornado <https://www.tornadoweb.org/en/stable/>`_ or
 `websockets <https://websockets.readthedocs.io/en/stable/intro.html>`_.**
@@ -23,10 +20,6 @@ Otherwise you can run-time patch supported WebSocket libraries using:
     wsaccel.patch_autobahn()  # for autobahn.
     wsaccel.patch_ws4py()     # for ws4py.
 
-.. note::
-    WSAccell also provides accelerator for Tornado.  But Tornado provides own speedup
-    module for now.  So Tornado accelerator has been deprecated.
-
 
 test
 ----
@@ -36,4 +29,4 @@ wsaccel uses `pytest <https://pytest.org/>`_ for testing.
 .. code-block:: console
 
     $ pip install pytest
-    $ py.test tests
+    $ pytest tests
