@@ -47,31 +47,8 @@ ext_modules = [
     Extension('wsaccel.xormask', ['wsaccel/xormask.c']),
 ]
 
-with open('README.rst', encoding='utf-8') as f:
-    long_description = f.read()
-
-setup(name="wsaccel",
-      version='0.6.4',
-      description="Accelerator for ws4py and AutobahnPython",
-      maintainer="Inada Naoki",
-      maintainer_email="songofacandy@gmail.com",
-      url="https://github.com/methane/wsaccel",
-      packages=["wsaccel"],
-      cmdclass={'build_ext': BuildExt, 'sdist': Sdist},
-      ext_modules=ext_modules,
-      platforms=["any"],
-      license='Apache',
-      long_description=long_description,
-      classifiers=[
-          'Intended Audience :: Developers',
-          'Operating System :: OS Independent',
-          'Programming Language :: Python',
-          'Programming Language :: Python :: 3',
-          'Programming Language :: Python :: 3.7',
-          'Programming Language :: Python :: 3.8',
-          'Programming Language :: Python :: 3.9',
-          'Programming Language :: Python :: 3.10',
-          'Programming Language :: Python :: 3.11',
-          'Programming Language :: Python :: Implementation :: CPython',
-          ],
-      )
+setup(
+    packages=["wsaccel"],
+    cmdclass={'build_ext': BuildExt, 'sdist': Sdist},
+    ext_modules=ext_modules,
+)
