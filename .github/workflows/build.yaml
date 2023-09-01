@@ -13,7 +13,7 @@ jobs:
       - name: build
         run: |
           pip install -r requirements.txt
-          python setup.py sdist
+          python -m build -s
       - uses: actions/upload-artifact@v2
         with:
           name: sdist
@@ -45,10 +45,10 @@ jobs:
         shell: bash
         run: |
           pip install -r requirements.txt
-          python setup.py sdist # To run cythonize
+          python -m build -s  # to run Cythonize
 
       - name: Build
-        uses: pypa/cibuildwheel@v2.11.2
+        uses: pypa/cibuildwheel@v2.15.0
         env:
           CIBW_ARCHS_LINUX: auto aarch64
           CIBW_ARCHS_MACOS: x86_64 universal2 arm64
