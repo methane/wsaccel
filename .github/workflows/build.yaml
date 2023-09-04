@@ -31,7 +31,7 @@ jobs:
 
       - name: Set up QEMU
         if: runner.os == 'Linux'
-        uses: docker/setup-qemu-action@v1
+        uses: docker/setup-qemu-action@v2
         with:
           platforms: arm64
 
@@ -55,7 +55,7 @@ jobs:
           CIBW_SKIP: pp*
 
       - name: Upload Wheels to artifact
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v3
         with:
           name: Wheels
           path: wheelhouse
