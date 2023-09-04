@@ -3,7 +3,7 @@ on: [push]
 
 jobs:
   build-sdist:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
@@ -14,7 +14,7 @@ jobs:
         run: |
           pip install -r requirements.txt
           python -m build -s
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         with:
           name: sdist
           path: dist
