@@ -1,4 +1,5 @@
-__version__ = '0.6.4'
+__version__ = '0.6.5'
+
 
 def patch_autobahn():
     from wsaccel.utf8validator import Utf8Validator
