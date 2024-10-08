@@ -1,3 +1,4 @@
+# cython: language_level=3
 from cpython.buffer cimport *
 from cpython.bytes cimport *
 
