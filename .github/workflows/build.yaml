@@ -5,8 +5,8 @@ jobs:
   build-sdist:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: "3.10"
           cache: "pip"
@@ -14,7 +14,7 @@ jobs:
         run: |
           pip install -r requirements.txt
           python -m build -s
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: sdist
           path: dist
@@ -27,16 +27,16 @@ jobs:
     name: Build wheels on ${{ matrix.os }}
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Set up QEMU
         if: runner.os == 'Linux'
-        uses: docker/setup-qemu-action@v2
+        uses: docker/setup-qemu-action@v3
         with:
           platforms: arm64
 
       - name: Set up Python 3.10
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: "3.10"
           cache: "pip"
@@ -48,14 +48,25 @@ jobs:
           python -m build -s  # to run Cythonize
 
       - name: Build
-        uses: pypa/cibuildwheel@v2.15.0
+        uses: pypa/cibuildwheel@v2.21.2
         env:
           CIBW_ARCHS_LINUX: auto aarch64
           CIBW_ARCHS_MACOS: x86_64 universal2 arm64
           CIBW_SKIP: pp*
 
       - name: Upload Wheels to artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
+        with:
+          name: Wheels-${{ matrix.os }}
+          path: wheelhouse
+
+  merge:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Merge Artifacts
+        uses: actions/upload-artifact/merge@v4
         with:
           name: Wheels
-          path: wheelhouse
+          pattern: Wheels-*
+          delete-merged: true
