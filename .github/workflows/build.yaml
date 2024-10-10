@@ -2,27 +2,10 @@ name: Build packages
 on: [push]
 
 jobs:
-  build-sdist:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.10"
-          cache: "pip"
-      - name: build
-        run: |
-          pip install -r requirements.txt
-          python -m build -s
-      - uses: actions/upload-artifact@v4
-        with:
-          name: sdist
-          path: dist
-
   build:
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        os: [ubuntu-latest, windows-latest, macos-13, macos-14]
     runs-on: ${{ matrix.os }}
     name: Build wheels on ${{ matrix.os }}
 
@@ -41,17 +24,23 @@ jobs:
           python-version: "3.10"
           cache: "pip"
 
-      - name: Prepare
+      - name: Build sdist
         shell: bash
         run: |
-          pip install -r requirements.txt
-          python -m build -s  # to run Cythonize
+          pipx run build -s  # Cythonize
 
-      - name: Build
+      - name: Save sdist
+        if: runner.os == 'Linux'
+        uses: actions/upload-artifact@v4
+        with:
+          name: sdist
+          path: dist
+
+      - name: Build Wheels
         uses: pypa/cibuildwheel@v2.21.2
         env:
           CIBW_ARCHS_LINUX: auto aarch64
-          CIBW_ARCHS_MACOS: x86_64 universal2 arm64
+          CIBW_ARCHS_Windows: auto ARM64
           CIBW_SKIP: pp*
 
       - name: Upload Wheels to artifact
