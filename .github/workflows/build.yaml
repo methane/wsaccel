@@ -5,7 +5,7 @@ jobs:
   build:
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-13, macos-14]
+        os: [ubuntu-latest, windows-latest, macos-14]
     runs-on: ${{ matrix.os }}
     name: Build wheels on ${{ matrix.os }}
 
@@ -18,10 +18,10 @@ jobs:
         with:
           platforms: arm64
 
-      - name: Set up Python 3.10
+      - name: Set up Python 3.11
         uses: actions/setup-python@v5
         with:
-          python-version: "3.10"
+          python-version: "3.11"
           cache: "pip"
 
       - name: Build sdist
@@ -33,20 +33,22 @@ jobs:
         if: runner.os == 'Linux'
         uses: actions/upload-artifact@v4
         with:
-          name: sdist
+          name: build-sdist
           path: dist
 
       - name: Build Wheels
         uses: pypa/cibuildwheel@v2.21.2
         env:
           CIBW_ARCHS_LINUX: auto aarch64
-          CIBW_ARCHS_Windows: auto ARM64
+          CIBW_ARCHS_WINDOWS: auto ARM64
+          CIBW_ARCHS_MACOS: universal2
+          CIBW_TEST_SKIP: "*-win_arm64"
           CIBW_SKIP: pp*
 
       - name: Upload Wheels to artifact
         uses: actions/upload-artifact@v4
         with:
-          name: Wheels-${{ matrix.os }}
+          name: build-${{ matrix.os }}
           path: wheelhouse
 
   merge:
@@ -56,6 +58,6 @@ jobs:
       - name: Merge Artifacts
         uses: actions/upload-artifact/merge@v4
         with:
-          name: Wheels
-          pattern: Wheels-*
+          name: wsaccel-dists
+          pattern: "build-*"
           delete-merged: true
