@@ -1,7 +1,7 @@
 [build-system]
 requires = [
     "Cython~=3.0.11",
-    "setuptools>=35.0.2",
+    "setuptools>=77.0.2",
 ]
 build-backend = "setuptools.build_meta"
 
@@ -14,7 +14,7 @@ readme = "README.rst"
 authors = [
   {name = "Inada Naoki", email="songofacandy@gmail.com"},
 ]
-license = {text = "Apache 2.0"}
+license = "Apache-2.0"
 
 classifiers = [
   "Intended Audience :: Developers",
